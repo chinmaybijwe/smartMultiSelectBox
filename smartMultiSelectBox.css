@@ -23,15 +23,21 @@
   float:left;
   border-left: 1px solid gray;
 }
-
-.combo-from .item:hover, .combo-to .item:hover {
+.combo-box .item {
+  border-bottom:  1px solid #b8b9a6;
+  padding: 5px 10px;
+}
+.combo-box .item:last-child {
+  border: none;
+}
+.combo-box .item:hover {
   background-color: #89c899;
   -webkit-transition: all 0.24s ease-out;
   -moz-transition: all 0.24s ease-out;
   -o-transition: all 0.24s ease-out;
   transition: all 0.24s ease-out;
 }
-.combo-from .item.selected, .combo-to .item.selected {
+.combo-box .item.selected {
   background-color: #13985c;
 }
 
