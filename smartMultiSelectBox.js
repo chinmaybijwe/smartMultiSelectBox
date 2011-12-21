@@ -16,6 +16,12 @@
     },
     update : function( content ) { 
       // !!! 
+    },
+    _create : function(content_elm) {
+		       
+     },
+    _destroy : function(content_elm) {
+    	
     }
 
   };
