@@ -1,46 +1,37 @@
 
 .combo-box {
-  border: 2px solid black;
   height: 300px;
   width: 402px;
   border-radius: 6px;
 }
 
 .combo-head {
-  border-bottom: 1px solid gray;
   height: 30px;
   text-align: center;
   line-height: 30px;
 }
 
 .combo-to, .combo-from {
-  width: 180px;
+  width: 39%;
   height: 270px;
 }
 .combo-from {
   float:left;
-  border-right: 1px solid gray;
-/*  background-color: #234543;
-*/
+  border: 1px solid gray;
+  background-color: #FFFFFF;
 } 
 
 .combo-to {
   float:left;
-  border-left: 1px solid gray;
-/*  background-color: #434543;
-*/}
-
-.combo-middle {
-  width: 40px;
-  height: 270px;
-  float: left;
-
+  border: 1px solid gray;
+  background-color: #FFFFFF;
 }
 
-
-
-
-
+.combo-middle {
+  width: 20%;
+  height: 270px;
+  float: left;
+}
 
 body {
   background: aliceBlue;

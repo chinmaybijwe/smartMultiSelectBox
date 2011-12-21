@@ -11,7 +11,6 @@
       	 var ele = this;
            _create(ele);
       });
-        
 
    
     function init( options ) { 
