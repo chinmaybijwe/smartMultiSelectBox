@@ -11,7 +11,8 @@
       this.each (function() {
       	 var ele = this;
       	 
-           _create(ele,config.data);
+           _create(ele, config.data);
+           _attachEvents(ele, config.data);
       });
 
    
@@ -27,7 +28,8 @@
     function update( content ) { 
       // !!! 
     };
-    function _create(content_elm,data) {
+
+    function _create(content_elm, data) {
     	var items = '';
     	
     	$.each(data,function(key,val) {
@@ -43,14 +45,27 @@
 			items
 			+"</div> \
     		<div class='combo-middle'> \
-    			.. \
+    			<button class='add-button'>>></button> \
+          <button class='remove-button'> << </button>\
     		</div> \
     		<div class='combo-to'> \
-    			TO \
     	    </div> \
     	</div>"; 
     	$(content_elm).html(htm);  
      };
+    function _attachEvents (elm, data) {
+      $elm=$(elm);
+      $elm.find(".combo-box").on("click", ".item", function(){
+        $(this).toggleClass('selected');
+      });
+      $elm.find(".add-button").click (function(){
+        $elm.find(".combo-to").append( $elm.find(".combo-from .item.selected").removeClass("selected"));
+      });
+      $elm.find(".remove-button").click (function(){
+        $elm.find(".combo-from").append( $elm.find(".combo-to .item.selected").removeClass("selected"));
+      });
+    };
+
     function _destroy(content_elm) {
     	
     };
