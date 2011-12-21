@@ -1,7 +1,8 @@
 (function($){
   $.fn.smsBox = function (settings) {
 	config = { 
-			'color' : 'red' //lets add config option as we make it more flexible
+			'color' : 'red', //lets add config option as we make it more flexible
+			'data'  : {1:'Empty'}
 	}; 
     if (settings) $.extend(config, settings);
     /**
@@ -9,7 +10,8 @@
      **/
       this.each (function() {
       	 var ele = this;
-           _create(ele);
+      	 
+           _create(ele,config.data);
       });
 
    
@@ -25,15 +27,21 @@
     function update( content ) { 
       // !!! 
     };
-    function _create(content_elm) {
+    function _create(content_elm,data) {
+    	var items = '';
+    	
+    	$.each(data,function(key,val) {
+			items += "<div class='item' id='"+key+"'>"+ val +"</div>";
+		});
+    	
     	var htm = " \
     	<div class='combo-box'> \
     		<div class='combo-head'> \
-    			HEAD \
-    		</div> \
+    			</div> \
     		<div class='combo-from'> \
-    			FROM \
-    		</div> \
+    		"+
+			items
+			+"</div> \
     		<div class='combo-middle'> \
     			.. \
     		</div> \
