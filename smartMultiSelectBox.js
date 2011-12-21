@@ -1,7 +1,7 @@
 (function($){
   $.fn.smsBox = function (settings) {
 	config = { 
-			'color' : 'div.tooltip_description'
+			'color' : 'red' //lets add config option as we make it more flexible
 	}; 
     if (settings) $.extend(config, settings);
     /**
@@ -27,7 +27,7 @@
       // !!! 
     };
     function _create(content_elm) {
-		 $(content_elm).html("it comes here ");      
+		      
      };
     function _destroy(content_elm) {
     	
