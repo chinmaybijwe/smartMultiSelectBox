@@ -18,7 +18,7 @@
       // !!! 
     },
     _create : function(content_elm) {
-		       
+		 content_elem.html("it comes here ");      
      },
     _destroy : function(content_elm) {
     	
@@ -36,5 +36,13 @@
     return this.each (function() {
       
     });
+      /**
+      * Apply interaction to all the matching elements
+      **/
+     this.each(function() {
+         var ele = this;
+         _show(ele);
+     });
+
   };
 })(jQuery);
