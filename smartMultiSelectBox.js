@@ -27,7 +27,22 @@
       // !!! 
     };
     function _create(content_elm) {
-		      
+    	var htm = " \
+    	<div class='combo-box'> \
+    		<div class='combo-head'> \
+    			HEAD \
+    		</div> \
+    		<div class='combo-from'> \
+    			FROM \
+    		</div> \
+    		<div class='combo-middle'> \
+    			.. \
+    		</div> \
+    		<div class='combo-to'> \
+    			TO \
+    	    </div> \
+    	</div>"; 
+    	$(content_elm).html(htm);  
      };
     function _destroy(content_elm) {
     	
