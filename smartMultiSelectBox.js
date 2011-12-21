@@ -1,48 +1,39 @@
 (function($){
-  $.fn.smsBox = function (method, options) {
-    var settings = $.extend ({
-      'location' : 'top' 
-    }, options),
+  $.fn.smsBox = function (settings) {
+	config = { 
+			'color' : 'div.tooltip_description'
+	}; 
+    if (settings) $.extend(config, settings);
+    /**
+     * Apply smsBox to the matching elements
+     **/
+      this.each (function() {
+      	 var ele = this;
+           _create(ele);
+      });
+        
 
-    methods = {
-    init : function( options ) { 
+   
+    function init( options ) { 
       // THIS 
-    },
-    show : function( ) {
+    };
+    function show( ) {
       // IS
-    },
-    hide : function( ) { 
+    };
+    function hide( ) { 
       // GOOD
-    },
-    update : function( content ) { 
+    };
+    function update( content ) { 
       // !!! 
-    },
-    _create : function(content_elm) {
-		 content_elem.html("it comes here ");      
-     },
-    _destroy : function(content_elm) {
+    };
+    function _create(content_elm) {
+		 $(content_elm).html("it comes here ");      
+     };
+    function _destroy(content_elm) {
     	
-    }
+    };
 
-  };
-  if ( methods[method] ) {
-      return methods[ method ].apply( this, Array.prototype.slice.call( arguments, 1 ));
-    } else if ( typeof method === 'object' || ! method ) {
-      return methods.init.apply( this, arguments );
-    } else {
-      $.error( 'Method ' +  method + ' does not exist on jQuery.tooltip' );
-    }    
-
-    return this.each (function() {
-      
-    });
-      /**
-      * Apply interaction to all the matching elements
-      **/
-     this.each(function() {
-         var ele = this;
-         _show(ele);
-     });
+    return this;
 
   };
 })(jQuery);
