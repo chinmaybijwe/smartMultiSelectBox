@@ -69,17 +69,18 @@
         selectedItems.each (function() {
           var id = $(this).attr("id"),
           string = $(this).html();
-          $form_field.append("<option value="+ id + ">"+ string +"</option>");
+          $form_field.append("<option value="+ id + " data-attr='"+id+string+"'>"+ string +"</option>");
         });
       });
-      
+
       $elm.find(".remove-button").click (function(){
         selectedItems = $elm.find(".combo-to .item.selected");
 
         $elm.find(".combo-from").append( selectedItems.removeClass("selected"));
         selectedItems.each (function() {
-        var id = $(this).attr("id");
-        $(" .combo-form-field option[value='"+ id +"']").remove();
+        var id = $(this).attr("id"),
+        string = $(this).html();
+        $(" .combo-form-field option[data-attr='"+ id+string +"']").remove();
         });
       });
     };
