@@ -50,19 +50,37 @@
     		</div> \
     		<div class='combo-to'> \
     	    </div> \
+        <select class='combo-form-field' multiple='true' style='display:none' ></select> \
     	</div>"; 
     	$(content_elm).html(htm);  
      };
     function _attachEvents (elm, data) {
-      $elm=$(elm);
+      var $elm = $(elm),
+      selectedItems,
+      $form_field = $elm.find(".combo-form-field");
+
       $elm.find(".combo-box").on("click", ".item", function(){
         $(this).toggleClass('selected');
       });
+
       $elm.find(".add-button").click (function(){
-        $elm.find(".combo-to").append( $elm.find(".combo-from .item.selected").removeClass("selected"));
+        selectedItems = $elm.find(".combo-from .item.selected").removeClass("selected");
+        $elm.find(".combo-to").append(selectedItems );
+        selectedItems.each (function() {
+          var id = $(this).attr("id"),
+          string = $(this).html();
+          $form_field.append("<option value="+ id + ">"+ string +"</option>");
+        });
       });
+      
       $elm.find(".remove-button").click (function(){
-        $elm.find(".combo-from").append( $elm.find(".combo-to .item.selected").removeClass("selected"));
+        selectedItems = $elm.find(".combo-to .item.selected");
+
+        $elm.find(".combo-from").append( selectedItems.removeClass("selected"));
+        selectedItems.each (function() {
+        var id = $(this).attr("id");
+        $(" .combo-form-field option[value='"+ id +"']").remove();
+        });
       });
     };
 
