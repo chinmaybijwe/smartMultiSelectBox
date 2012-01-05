@@ -44,8 +44,8 @@
       items
       +"</div> \
         <div class='combo-middle'> \
-          <button class='add-button'> >> </button> \
-          <button class='remove-button'> << </button>\
+          <input type='button' class='add-button' value='>>' /> \
+          <input type='button' class='remove-button' value= '<<' /> \
         </div> \
         <div class='combo-to'> \
           </div> \
@@ -73,7 +73,7 @@
           string = $(this).html();
           $elm.append("<option value="+ id + " data-attr='"+id+string+"'>"+ string +"</option>");
         });
-        e.preventDefault();
+        //e.preventDefault();
       });
 
       comboBox.find(".remove-button").click (function(e){
@@ -85,7 +85,7 @@
         string = $(this).html();
         $(" .combo-form-field option[data-attr='"+ id+string +"']").remove();
         });
-        e.preventDefault();
+        //e.preventDefault();
       });
       return false;
     };
