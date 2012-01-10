@@ -2,7 +2,11 @@
   $.fn.smsBox = function (settings) {
   config = {
       'color' : 'red', //lets add config option as we make it more flexible
-      'data'  : {1:'Empty'}
+      'data'  : {1:'Empty'},
+      'ui-smsbox': 'ui-smsbox',
+      'ui-smsbox-from': 'ui-smsbox-from',
+      'ui-smsbox-middle': 'ui-smsbox-middle',
+      'ui-smsbox-to': 'ui-smsbox-to',
   };
     if (settings) $.extend(config, settings);
     /**
@@ -11,8 +15,8 @@
       this.each (function() {
         //ele is the selectbox
         var ele = this,
-        comboBox= _create($(ele), config.data);
-        _attachEvents(ele, comboBox, config.data);
+        comboBox= _create($(ele), config.data, config);
+        _attachEvents(ele, comboBox, config.data, config);
       });
 
     function init( options ) {
@@ -28,33 +32,33 @@
       // !!!
     };
 
-    function _create(ele, data) {
+    function _create(ele, data, options) {
       var items = '';
 
       $.each(data,function(key,val) {
       items += "<div class='item' id='"+key+"'>"+ val +"</div>";
-    });
+      });
 
       var htm = " \
-      <div class='combo-box'> \
-        <div class='combo-head'> \
+      <div class='"+options['ui-smsbox']+"'> \
+        <div class='"+options['ui-smsbox-head']+"'> \
           </div> \
-        <div class='combo-from'> \
+        <div class='"+options['ui-smsbox-from']+"'> \
         "+
       items
       +"</div> \
-        <div class='combo-middle'> \
+        <div class='"+options['ui-smsbox-middle']+"'> \
           <input type='button' class='add-button' value='>>' /> \
           <input type='button' class='remove-button' value= '<<' /> \
         </div> \
-        <div class='combo-to'> \
+        <div class='"+options['ui-smsbox-to']+"'> \
           </div> \
       </div>";
       ele.after(htm);
       return ele.next();
 
      };
-    function _attachEvents (elm, comboBox, data) {
+    function _attachEvents (elm, comboBox, data, options) {
 
       var $elm = $(elm),
       selectedItems;
@@ -66,8 +70,8 @@
       });
 
       comboBox.find(".add-button").click (function(e){
-        selectedItems = comboBox.find(".combo-from .item.selected").removeClass("selected");
-        comboBox.find(".combo-to").append(selectedItems );
+        selectedItems = comboBox.find("."+options['ui-smsbox-from']+" .item.selected").removeClass("selected");
+        comboBox.find("."+options['ui-smsbox-to']).append(selectedItems );
         selectedItems.each (function() {
           var id = $(this).attr("id"),
           string = $(this).html();
@@ -77,9 +81,9 @@
       });
 
       comboBox.find(".remove-button").click (function(e){
-        selectedItems = comboBox.find(".combo-to .item.selected");
+        selectedItems = comboBox.find("."+options['ui-smsbox-to']+" .item.selected");
 
-        comboBox.find(".combo-from").append( selectedItems.removeClass("selected"));
+        comboBox.find(".ui-smsbox-from").append( selectedItems.removeClass("selected"));
         selectedItems.each (function() {
         var id = $(this).attr("id"),
         string = $(this).html();

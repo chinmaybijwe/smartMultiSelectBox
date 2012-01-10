@@ -1,59 +1,51 @@
-.combo-box {
+.ui-smsbox {
   border: 2px solid black;
   min-height: 231px;
   width: 402px;
   border-radius: 6px;
 }
-.combo-head {
+.ui-smsbox-head {
   border-bottom: 1px solid gray;
   height: 30px;
   text-align: center;
   line-height: 30px;
 }
 
-.combo-to, .combo-from {
+.ui-smsbox-to, .ui-smsbox-from {
   width: 180px;
   min-height: 200px;
   max-height: 200px;
   overflow: scroll;
 }
-.combo-from {
+.ui-smsbox-from {
   float:left;
   border-right: 1px solid gray;
 } 
-.combo-to {
+.ui-smsbox-to {
   float:left;
   border-left: 1px solid gray;
 }
-.combo-box .item {
+
+.ui-smsbox .item {
   border-bottom:  1px solid #b8b9a6;
   padding: 5px 10px;
 }
-.combo-box .item:last-child {
+.ui-smsbox .item:last-child {
   border: none;
 }
-.combo-box .item:hover {
+.ui-smsbox .item:hover {
   background-color: #89c899;
   -webkit-transition: all 0.24s ease-out;
   -moz-transition: all 0.24s ease-out;
   -o-transition: all 0.24s ease-out;
   transition: all 0.24s ease-out;
 }
-.combo-box .item.selected {
+.ui-smsbox .item.selected {
   background-color: #13985c;
 }
 
-.combo-middle {
+.ui-smsbox-middle {
   width: 40px;
   min-height: 200px;
   float: left;
-}
-
-
-
-
-
-
-body {
-  background: aliceBlue;
 }
