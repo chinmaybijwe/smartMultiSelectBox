@@ -21,8 +21,8 @@
         var ele = this,
         comboBox;
 
-        comboBox= _create($(ele), data, config);
-        _attachEvents(ele, comboBox, data.unselected, config);
+        comboBox= _create($(ele),  config);
+        _attachEvents(ele, comboBox, config);
       });
 
     function init( options ) {
@@ -45,7 +45,7 @@
       });
       return items;
     }
-    function _create(ele, data, options) {
+    function _create(ele, options) {
       var unselectedItems,
       selectedItems,
       htm,
@@ -53,7 +53,7 @@
 
       if (comboBoxOptions.size()>0) {
         comboBoxOptions.each (function() {
-          data.unselected[$(this).html()] = $(this).attr("value");
+          data.unselected[$(this).attr("value")] = $(this).text();
           $(this).remove();
         });
       }
@@ -84,7 +84,7 @@
       return ele.next();
 
      };
-    function _attachEvents (elm, comboBox, data, options) {
+    function _attachEvents (elm, comboBox, options) {
 
       var $elm = $(elm),
       selectedItems,
@@ -106,7 +106,7 @@
         comboBox.find("."+options['ui-smsbox-to']).append(selectedItems );
         selectedItems.each (function() {
           var id = $(this).attr("id"),
-          string = $(this).html();
+          string = $(this).text();
           $elm.append("<option value="+ id + " data-attr='"+id+string+"'>"+ string +"</option>");
         });
       });
@@ -117,7 +117,7 @@
         comboBox.find("."+options['ui-smsbox-from']).append( selectedItems.removeClass("selected"));
         selectedItems.each (function() {
         var id = $(this).attr("id"),
-        string = $(this).html();
+        string = $(this).text();
         $(" .combo-form-field option[data-attr='"+ id+string +"']").remove();
         });
       });
