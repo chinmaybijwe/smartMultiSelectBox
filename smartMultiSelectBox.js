@@ -1,11 +1,12 @@
-(function($){
+(function ($) {
   $.fn.smsBox = function (settings) {
   config = {
       'ui-smsbox': 'ui-smsbox',
       'ui-smsbox-from': 'ui-smsbox-from',
       'ui-smsbox-middle': 'ui-smsbox-middle',
       'ui-smsbox-to': 'ui-smsbox-to',
-  };
+      'data': {}
+    };
     if (settings) $.extend(config, settings);
     /**
      * Apply smsBox to the matching elements
@@ -13,6 +14,16 @@
       this.each (function() {
         //ele is the selectbox
         var ele = this,
+        comboBox,
+        comboBoxOptions = $(ele).find("option");
+
+        if (comboBoxOptions.size()>0) {
+          comboBoxOptions.each (function() {
+            config.data[$(this).html()] = $(this).attr("value");
+            $(this).remove();
+          });
+        }
+
         comboBox= _create($(ele), config.data, config);
         _attachEvents(ele, comboBox, config.data, config);
       });
@@ -30,14 +41,18 @@
       // !!!
     };
 
-    function _create(ele, data, options) {
+    function _populateData (data) {
       var items = '';
-
       $.each(data,function(key,val) {
-      items += "<div class='item' id='"+key+"'>"+ val +"</div>";
+      items += "<div class='item' id='"+ key + "'>" + val + "</div>";
       });
+      return items;
+    }
+    function _create(ele, data, options) {
+      var items, htm;
+      items = _populateData (data);
 
-      var htm = " \
+      htm = " \
       <div class='"+options['ui-smsbox']+"'> \
         <div class='"+options['ui-smsbox-head']+"'> \
           </div> \
@@ -59,9 +74,15 @@
     function _attachEvents (elm, comboBox, data, options) {
 
       var $elm = $(elm),
-      selectedItems;
+      selectedItems,
+      elmOptions = $elm.find("option");
 
       $elm.hide().addClass('combo-form-field');
+      if (elmOptions.size() > 0) {
+        elmOptions.each(function () {
+          comboBox.find("."+options['ui-smsbox-from']).append(this.value );
+        })
+      }
 
       comboBox.on("click", ".item", function(){
         $(this).toggleClass('selected');
@@ -75,7 +96,6 @@
           string = $(this).html();
           $elm.append("<option value="+ id + " data-attr='"+id+string+"'>"+ string +"</option>");
         });
-        //e.preventDefault();
       });
 
       comboBox.delegate('.remove-button', 'click', function(e){
@@ -87,7 +107,6 @@
         string = $(this).html();
         $(" .combo-form-field option[data-attr='"+ id+string +"']").remove();
         });
-        //e.preventDefault();
       });
       return false;
     };
