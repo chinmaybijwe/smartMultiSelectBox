@@ -1,12 +1,16 @@
 (function ($) {
   $.fn.smsBox = function (settings) {
-  config = {
+  var config = {
       'ui-smsbox': 'ui-smsbox',
       'ui-smsbox-from': 'ui-smsbox-from',
       'ui-smsbox-middle': 'ui-smsbox-middle',
       'ui-smsbox-to': 'ui-smsbox-to',
       'data': {}
-    };
+    },
+  data = {
+    unselected : {},
+    selected : {}
+  }
     if (settings) $.extend(config, settings);
     /**
      * Apply smsBox to the matching elements
@@ -19,13 +23,13 @@
 
         if (comboBoxOptions.size()>0) {
           comboBoxOptions.each (function() {
-            config.data[$(this).html()] = $(this).attr("value");
+            data.unselected[$(this).html()] = $(this).attr("value");
             $(this).remove();
           });
         }
 
-        comboBox= _create($(ele), config.data, config);
-        _attachEvents(ele, comboBox, config.data, config);
+        comboBox= _create($(ele), data.unselected, config);
+        _attachEvents(ele, comboBox, data.unselected, config);
       });
 
     function init( options ) {
