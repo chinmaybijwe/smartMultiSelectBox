@@ -123,7 +123,7 @@
       });
 
       comboBox.delegate("."+options['ui-smsbox-search'], 'keyup' , function(e){
-        _search($(this).val());
+        _search($(this).val(),data);
       });
 
       return false;
@@ -134,6 +134,22 @@
     };
 
     function _search(searchText) {
+      var patt = new RegExp(searchText,'i'),
+      searchedData = {
+        unselected : {},
+        selected : {}
+      };
+      if (searchText === "") {
+        _update(data);
+      }
+      $.each(data.unselected,function(key, val) {
+        if (val.search(patt) !== -1) {
+          searchedData.unselected[key] = val;
+        }
+
+      });
+      
+     
 
     };
 
