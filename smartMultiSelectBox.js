@@ -2,6 +2,7 @@
   $.fn.smsBox = function (settings) {
   var config = {
       'ui-smsbox': 'ui-smsbox',
+      'ui-smsbox-head': 'ui-smsbox-head',
       'ui-smsbox-from': 'ui-smsbox-from',
       'ui-smsbox-middle': 'ui-smsbox-middle',
       'ui-smsbox-to': 'ui-smsbox-to',
@@ -114,7 +115,6 @@
         selectedItems.each (function() {
         var id = $(this).attr("id");
         $elm.find("option[value='"+ id +"']").removeAttr("selected");
-        //$(" .combo-form-field option[value='"+ id +"']").remove();
         });
       });
 
