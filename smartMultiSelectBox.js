@@ -5,12 +5,13 @@
       'ui-smsbox-from': 'ui-smsbox-from',
       'ui-smsbox-middle': 'ui-smsbox-middle',
       'ui-smsbox-to': 'ui-smsbox-to',
-      'data': {}
+      'ui-smsbox-search': 'ui-smsbox-search'
     },
   data = {
     unselected : {},
     selected : {}
   }
+
     if (settings) $.extend(config, settings);
     /**
      * Apply smsBox to the matching elements
@@ -58,6 +59,9 @@
 
       htm = " \
       <div class='"+options['ui-smsbox']+"'> \
+         <div> \
+            <input type='text' value='' class='"+options['ui-smsbox-search']+"' /> \
+         </div> \
         <div class='"+options['ui-smsbox-head']+"'> \
           </div> \
         <div class='"+options['ui-smsbox-from']+"'> \
@@ -112,10 +116,19 @@
         $(" .combo-form-field option[data-attr='"+ id+string +"']").remove();
         });
       });
+
+      comboBox.delegate("."+options['ui-smsbox-search'], 'keyup' , function(e){
+        _search($(this).val());
+      });
+
       return false;
     };
 
     function _destroy(content_elm) {
+
+    };
+
+    function _search(searchText) {
 
     };
 
