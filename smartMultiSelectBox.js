@@ -11,19 +11,20 @@
     unselected : {},
     selected : {}
 
-  };
-    if (settings) $.extend(config, settings);
-    /**
-     * Apply smsBox to the matching elements
-     **/
-      this.each (function() {
-        //ele is the selectbox
-        var ele = this,
-        comboBox;
+  }
 
-        comboBox= _create($(ele),  config);
-        _attachEvents(ele, comboBox, config);
-      });
+  if (settings) $.extend(config, settings);
+  /**
+   * Apply smsBox to the matching elements
+   **/
+    this.each (function() {
+      //ele is the selectbox
+      var ele = this,
+      comboBox;
+
+      comboBox= _create($(ele),  config);
+      _attachEvents(ele, comboBox, config);
+    });
 
     function init( options ) {
       // THIS
@@ -54,11 +55,10 @@
       if (comboBoxOptions.size()>0) {
         comboBoxOptions.each (function() {
           data.unselected[$(this).attr("value")] = $(this).text();
-          $(this).remove();
         });
       }
-      selectedItems = _populateData (data.unselected);
-      unSelectedItems = _populateData (data.selected);
+      unSelectedItems = _populateData (data.unselected);
+      selectedItems = _populateData (data.selected);
 
       htm = " \
       <div class='"+options['ui-smsbox']+"'> \
@@ -69,14 +69,14 @@
           </div> \
         <div class='"+options['ui-smsbox-from']+"'> \
         "+
-      selectedItems
+      unSelectedItems
       +"</div> \
         <div class='"+options['ui-smsbox-middle']+"'> \
           <input type='button' class='add-button' value='>' /> \
           <input type='button' class='remove-button' value= '<' /> \
         </div> \
         <div class='"+options['ui-smsbox-to']+"'> \
-          "+unSelectedItems
+          "+selectedItems
           +
       "</div> \
       </div>";
@@ -91,11 +91,7 @@
       elmOptions = $elm.find("option");
 
       $elm.hide().addClass('combo-form-field');
-      if (elmOptions.size() > 0) {
-        elmOptions.each(function () {
-          comboBox.find("."+options['ui-smsbox-from']).append(this.value );
-        })
-      }
+
 
       comboBox.on("click", ".item", function(){
         $(this).toggleClass('selected');
@@ -107,7 +103,7 @@
         selectedItems.each (function() {
           var id = $(this).attr("id"),
           string = $(this).text();
-          $elm.append("<option value="+ id + " data-attr='"+id+string+"'>"+ string +"</option>");
+          $elm.find("option[value='"+ id +"']").attr("selected",  "selected");
         });
       });
 
@@ -116,9 +112,9 @@
 
         comboBox.find("."+options['ui-smsbox-from']).append( selectedItems.removeClass("selected"));
         selectedItems.each (function() {
-        var id = $(this).attr("id"),
-        string = $(this).text();
-        $(" .combo-form-field option[data-attr='"+ id+string +"']").remove();
+        var id = $(this).attr("id");
+        $elm.find("option[value='"+ id +"']").removeAttr("selected");
+        //$(" .combo-form-field option[value='"+ id +"']").remove();
         });
       });
 
