@@ -1,6 +1,7 @@
 (function($){
   $.fn.smsBox = function (settings) {
   config = {
+      'data'  : {1:'Empty'},
       'ui-smsbox': 'ui-smsbox',
       'ui-smsbox-from': 'ui-smsbox-from',
       'ui-smsbox-middle': 'ui-smsbox-middle',
@@ -78,7 +79,7 @@
         //e.preventDefault();
       });
 
-      comboBox.delegate('.remove-button', 'click', (function(e){
+      comboBox.delegate('.remove-button', 'click', function(e){
         selectedItems = comboBox.find("."+options['ui-smsbox-to']+" .item.selected");
 
         comboBox.find(".ui-smsbox-from").append( selectedItems.removeClass("selected"));
