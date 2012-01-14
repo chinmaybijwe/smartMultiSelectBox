@@ -34,8 +34,8 @@
     function hide( ) {
       $(this).hide();
     };
-    function update( content ) {
-      // !!!
+    function _update( updatedData, options ) {
+      $("."+options['ui-smsbox-from']).html(_populateData(updatedData.unselected));
     };
 
     function _populateData (data) {
@@ -123,7 +123,7 @@
       });
 
       comboBox.delegate("."+options['ui-smsbox-search'], 'keyup' , function(e){
-        _search($(this).val(),data);
+        _search($(this).val(),data, options);
       });
 
       return false;
@@ -133,24 +133,23 @@
 
     };
 
-    function _search(searchText) {
+    function _search(searchText, options) {
       var patt = new RegExp(searchText,'i'),
       searchedData = {
         unselected : {},
-        selected : {}
+        selected : data.selected
       };
       if (searchText === "") {
-        _update(data);
+        _update(data, options);
+        return;
       }
       $.each(data.unselected,function(key, val) {
         if (val.search(patt) !== -1) {
           searchedData.unselected[key] = val;
         }
-
       });
-      
-     
-
+      _update(searchedData, options);
+      return;
     };
 
     return this;
