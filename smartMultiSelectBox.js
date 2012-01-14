@@ -1,8 +1,6 @@
 (function($){
   $.fn.smsBox = function (settings) {
   config = {
-      'color' : 'red', //lets add config option as we make it more flexible
-      'data'  : {1:'Empty'},
       'ui-smsbox': 'ui-smsbox',
       'ui-smsbox-from': 'ui-smsbox-from',
       'ui-smsbox-middle': 'ui-smsbox-middle',
