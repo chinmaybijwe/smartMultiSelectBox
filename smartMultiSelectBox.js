@@ -10,8 +10,8 @@
   data = {
     unselected : {},
     selected : {}
-  }
 
+  };
     if (settings) $.extend(config, settings);
     /**
      * Apply smsBox to the matching elements
@@ -19,17 +19,9 @@
       this.each (function() {
         //ele is the selectbox
         var ele = this,
-        comboBox,
-        comboBoxOptions = $(ele).find("option");
+        comboBox;
 
-        if (comboBoxOptions.size()>0) {
-          comboBoxOptions.each (function() {
-            data.unselected[$(this).html()] = $(this).attr("value");
-            $(this).remove();
-          });
-        }
-
-        comboBox= _create($(ele), data.unselected, config);
+        comboBox= _create($(ele), data, config);
         _attachEvents(ele, comboBox, data.unselected, config);
       });
 
@@ -49,13 +41,24 @@
     function _populateData (data) {
       var items = '';
       $.each(data,function(key,val) {
-      items += "<div class='item' id='"+ key + "'>" + val + "</div>";
+        items += "<div class='item' id='"+ key + "'>" + val + "</div>";
       });
       return items;
     }
     function _create(ele, data, options) {
-      var items, htm;
-      items = _populateData (data);
+      var unselectedItems,
+      selectedItems,
+      htm,
+      comboBoxOptions = ele.find("option");
+
+      if (comboBoxOptions.size()>0) {
+        comboBoxOptions.each (function() {
+          data.unselected[$(this).html()] = $(this).attr("value");
+          $(this).remove();
+        });
+      }
+      selectedItems = _populateData (data.unselected);
+      unSelectedItems = _populateData (data.selected);
 
       htm = " \
       <div class='"+options['ui-smsbox']+"'> \
@@ -66,14 +69,16 @@
           </div> \
         <div class='"+options['ui-smsbox-from']+"'> \
         "+
-      items
+      selectedItems
       +"</div> \
         <div class='"+options['ui-smsbox-middle']+"'> \
           <input type='button' class='add-button' value='>' /> \
           <input type='button' class='remove-button' value= '<' /> \
         </div> \
         <div class='"+options['ui-smsbox-to']+"'> \
-          </div> \
+          "+unSelectedItems
+          +
+      "</div> \
       </div>";
       ele.after(htm);
       return ele.next();
