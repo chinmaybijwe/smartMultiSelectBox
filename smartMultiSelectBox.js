@@ -48,8 +48,8 @@
       items
       +"</div> \
         <div class='"+options['ui-smsbox-middle']+"'> \
-          <input type='button' class='add-button' value='>>' /> \
-          <input type='button' class='remove-button' value= '<<' /> \
+          <input type='button' class='add-button' value='>' /> \
+          <input type='button' class='remove-button' value= '<' /> \
         </div> \
         <div class='"+options['ui-smsbox-to']+"'> \
           </div> \
@@ -69,7 +69,7 @@
         $(this).toggleClass('selected');
       });
 
-      comboBox.find(".add-button").click (function(e){
+      comboBox.delegate('.add-button', 'click' , function(e){
         selectedItems = comboBox.find("."+options['ui-smsbox-from']+" .item.selected").removeClass("selected");
         comboBox.find("."+options['ui-smsbox-to']).append(selectedItems );
         selectedItems.each (function() {
@@ -80,7 +80,7 @@
         //e.preventDefault();
       });
 
-      comboBox.find(".remove-button").click (function(e){
+      comboBox.delegate('.remove-button', 'click', (function(e){
         selectedItems = comboBox.find("."+options['ui-smsbox-to']+" .item.selected");
 
         comboBox.find(".ui-smsbox-from").append( selectedItems.removeClass("selected"));
