@@ -102,6 +102,8 @@
         selectedItems.each (function() {
           var id = $(this).attr("id"),
           string = $(this).text();
+          data.selected[id]=string;
+          delete data.unselected[id];
           $elm.find("option[value='"+ id +"']").attr("selected",  "selected");
         });
       });
@@ -111,8 +113,10 @@
 
         comboBox.find("."+options['ui-smsbox-from']).append( selectedItems.removeClass("selected"));
         selectedItems.each (function() {
-        var id = $(this).attr("id");
-        $elm.find("option[value='"+ id +"']").removeAttr("selected");
+          var id = $(this).attr("id");
+          data.unselected[id]=$(this).text();
+          delete data.selected[id];
+          $elm.find("option[value='"+ id +"']").removeAttr("selected");
         });
       });
 
