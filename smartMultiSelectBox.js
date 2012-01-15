@@ -63,10 +63,8 @@
 
       htm = " \
       <div class='"+options['ui-smsbox']+"'> \
-         <div> \
-            <input type='text' value='' class='"+options['ui-smsbox-search']+"' /> \
-         </div> \
         <div class='"+options['ui-smsbox-head']+"'> \
+         <input type='text' value='' class='"+options['ui-smsbox-search']+"' /> \
           </div> \
         <div class='"+options['ui-smsbox-from']+"'> \
         "+
@@ -119,7 +117,7 @@
       });
 
       comboBox.delegate("."+options['ui-smsbox-search'], 'keyup' , function(e){
-        _search($(this).val(),data, options);
+        _search($(this).val(), options);
       });
 
       return false;
