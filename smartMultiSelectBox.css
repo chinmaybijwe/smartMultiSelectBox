@@ -2,7 +2,7 @@
   border: 2px solid black;
   min-height: 231px;
   width: 402px;
-  border-radius: 6px;
+  border-radius: 4px;
 }
 .ui-smsbox-head {
   border-bottom: 1px solid gray;
@@ -20,10 +20,19 @@
 .ui-smsbox-from {
   float:left;
   border-right: 1px solid gray;
-} 
+}
+
 .ui-smsbox-to {
   float:left;
   border-left: 1px solid gray;
+}
+
+.ui-smsbox-from .head, .ui-smsbox-to .head {
+  background-color: #DDD;
+  text-align: center;
+  padding: 5px 0;
+  border-bottom: 1px solid #AAA;
+
 }
 
 .ui-smsbox .item {
@@ -48,4 +57,9 @@
   width: 40px;
   min-height: 200px;
   float: left;
+}
+
+.add-button, .remove-button {
+  width: 30px;
+  margin: 40px 5px;
 }
